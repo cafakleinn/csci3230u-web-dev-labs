@@ -1,3 +1,7 @@
+<!-- CSCI 3230U - WebDev
+ Klein Cafa, 100909890
+ Lab 04-06 -->
+
 <!-- src/pages/spreadsheet.html -->
 <!DOCTYPE html>
 <html lang="en">
@@ -23,6 +27,7 @@
 </head>
 
 <body>
+  <!-- Hero header anchors the primary title/subtitle for orientation -->
   <header class="page-header">
     <h1>Gradebook Explorer</h1>
     <p class="subtitle">
@@ -31,6 +36,61 @@
   </header>
 
   <!-- Spreadsheet here -->
+  <main class="page-content">
+    <!-- Selection summary mirrors whichever row/column is highlighted -->
+    <section class="summary-panel card">
+      <div class="card-header">
+        <h2>Selection Summary</h2>
+      </div>
+      <div class="summary-grid" aria-live="polite">
+        <div class="summary-item">
+          <p class="summary-label">Selected</p>
+          <p class="summary-value" id="summary-selected">None</p>
+        </div>
+        <div class="summary-item">
+          <p class="summary-label">Count</p>
+          <p class="summary-value" id="summary-count">0</p>
+        </div>
+        <div class="summary-item">
+          <p class="summary-label">Mean</p>
+          <p class="summary-value" id="summary-mean">—</p>
+        </div>
+        <div class="summary-item">
+          <p class="summary-label">Min</p>
+          <p class="summary-value" id="summary-min">—</p>
+        </div>
+        <div class="summary-item">
+          <p class="summary-label">Max</p>
+          <p class="summary-value" id="summary-max">—</p>
+        </div>
+      </div>
+  
+      <div class="instructions-panel">
+        <h3>Instructions</h3>
+        <ul>
+          <li>Click a <strong>column header</strong> to select an assessment.</li>
+          <li>Click a <strong>row header</strong> to select a student.</li>
+          <li>Click a <strong>grade cell</strong> to edit; press <strong>ENTER</strong> to save.</li>
+        </ul>
+      </div>
+    </section>
+  
+    <!-- Gradebook grid is injected dynamically via spreadsheet.js -->
+    <section class="gradebook-panel card">
+      <div class="card-header">
+        <h2>Gradebook</h2>
+      </div>
+      <div id="table-container" class="table-container" aria-live="polite"></div>
+    </section>
+  
+    <!-- Letter-grade distribution chart (D3 renders into #chart) -->
+    <section class="chart-panel card">
+      <div class="card-header">
+        <h2>Grade Distribution (A–F)</h2>
+      </div>
+      <div id="chart" class="chart-container" aria-live="polite"></div>
+    </section>
+  </main>
 
 </body>
 </html>

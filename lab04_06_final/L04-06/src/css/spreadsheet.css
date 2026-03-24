@@ -1,1 +1,259 @@
 /* src/css/spreadsheet.css */
+
+:root {
+  /* Palette + typography tokens shared across the page */
+  --page-bg: #ffffff;
+  --hero-bg: #1a2a44;
+  --card-bg: #ffffff;
+  --card-border: #e0e5ef;
+  --muted-text: #556070;
+  --table-header: #d4d7df;
+  --table-row-header: #f2f4f8;
+  --selection-bg: #e0e0ff;
+  --selection-border: #7b8bff;
+  --font-stack: "Inter", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-stack);
+  background: var(--page-bg);
+  color: #0c1524;
+}
+
+/* Hero section keeps title/subtitle centered within max width */
+.page-header {
+  padding: 2.5rem 1.5rem 2rem;
+  color: #fff;
+  background: var(--hero-bg);
+  box-shadow: inset 0 -1px 0 rgb(255, 255, 255);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.page-header > * {
+  width: 100%;
+  max-width: 1200px;
+  text-align: left;
+}
+
+.page-header h1 {
+  margin: 0 0 0.5rem;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.page-header .subtitle {
+  margin: 0;
+  font-size: 1rem;
+  color: rgb(255, 255, 255);
+}
+
+/* Main content column wraps summary/table/chart panels */
+.page-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Shared card chrome used by summary/gradebook/chart panels */
+.card {
+  background: var(--card-bg);
+  border-radius: 14px;
+  border: 1px solid var(--card-border);
+  overflow: hidden;
+}
+
+.card-header {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.card-header h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #101828;
+}
+
+/* Responsive grid for selection statistics */
+.summary-panel .summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1rem;
+  padding: 1.5rem 1.5rem 0;
+}
+
+.summary-item {
+  background: #f6f8fc;
+  border-radius: 8px;
+  border: 1px solid #e1e6f0;
+  padding: 0.75rem 1rem;
+}
+
+.summary-label {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--muted-text);
+}
+
+.summary-value {
+  margin: 0.25rem 0 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #101828;
+}
+
+.instructions-panel {
+  border-top: 1px solid var(--card-border);
+  margin-top: 1.5rem;
+  padding: 1.25rem 1.75rem 1.75rem;
+  background: #f9fbff;
+}
+
+.instructions-panel h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+  color: #1f2933;
+}
+
+.instructions-panel ul {
+  margin: 0;
+  padding-left: 1.25rem;
+  color: #374151;
+  line-height: 1.5;
+}
+
+.instructions-panel li + li {
+  margin-top: 0.4rem;
+}
+
+.gradebook-panel,
+.chart-panel {
+  padding-bottom: 1rem;
+}
+
+/* Table wrapper allows horizontal scroll without breaking card */
+.table-container {
+  padding: 1.25rem;
+  overflow-x: auto;
+}
+
+/* Base gradebook table appearance */
+table.gradebook-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.95rem;
+}
+
+table.gradebook-table thead th {
+  background: var(--table-header);
+  font-weight: 600;
+  color: #1f2933;
+}
+
+table.gradebook-table th,
+table.gradebook-table td {
+  padding: 0.8rem 0.9rem;
+  border: 1px solid #dfe4ef;
+  text-align: center;
+  background: #fff;
+}
+
+.gradebook-panel .card-header {
+  border-bottom: 1px solid var(--card-border);
+}
+
+table.gradebook-table th:first-child {
+  text-align: center;
+  background: var(--table-header);
+}
+
+th.row-header {
+  background: var(--table-header);
+  border-right: 1px solid #d6dae5;
+  font-weight: 600;
+  color: #111827;
+  cursor: pointer;
+}
+
+th.column-header {
+  cursor: pointer;
+  border-bottom: 2px solid #c1c6d4;
+}
+
+th.column-header.active,
+th.row-header.active {
+  background: var(--table-header);
+  color: #111827;
+}
+
+td.grade-cell {
+  background: #fff;
+  cursor: pointer;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+td.grade-cell.selected {
+  background: var(--selection-bg);
+  box-shadow: none;
+}
+
+td.grade-cell.editing {
+  padding: 0;
+}
+
+td.grade-cell input.grade-input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font: inherit;
+  text-align: center;
+  padding: 0.75rem 0.5rem;
+}
+
+td.grade-cell.invalid {
+  background: #ffe1e1;
+  color: #8b0000;
+}
+
+.chart-container {
+  padding: 0 1.75rem 2rem;
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+}
+
+.chart-container svg {
+  width: 100%;
+  height: 100%;
+}
+
+.chart-placeholder {
+  text-align: center;
+  color: var(--muted-text);
+  font-style: italic;
+  margin: 0;
+}
+
+.chart-placeholder.is-hidden {
+  display: none;
+}
+
+@media (max-width: 960px) {
+  .summary-and-info {
+    grid-template-columns: 1fr;
+  }
+}
