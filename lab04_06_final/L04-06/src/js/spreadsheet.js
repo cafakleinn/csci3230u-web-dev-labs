@@ -112,7 +112,7 @@
     };
 
     const resetSummary = () => {
-        summaryEls.selected.text('None');
+        summaryEls.selected.text('None: -');
         summaryEls.count.text('0');
         summaryEls.mean.text('—');
         summaryEls.min.text('—');
